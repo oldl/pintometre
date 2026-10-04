@@ -4,13 +4,13 @@ Application statique, en français, sans installation ni compilation.
 
 ## Lancer
 
-Depuis le dossier `mini-apps` :
+Depuis le dossier `pintometre` :
 
 ```sh
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-Ouvrir http://127.0.0.1:8765/pintometre/ . Le fichier `index.html` peut également être ouvert directement.
+Ouvrir http://127.0.0.1:8765/ . Le fichier `index.html` peut également être ouvert directement.
 
 ## Parcours
 
@@ -45,3 +45,13 @@ Aucun compte, stockage persistant, suivi, estimation d’alcoolémie ou délai a
 - Navigation aller/retour : mêmes paramètres et résultat.
 - Simulation : termine à cinq touches, peut être arrêtée et rejouée.
 - Navigation clavier, zoom autorisé, dialogues fermables avec Échap, préférences de mouvement réduit.
+
+## Progression chaotique — Ce soir
+
+Au-delà de six équivalents vin (et non six boissons), une intensité logarithmique
+continue à croître avec chaque ajout. Le panneau se déforme, le total se dédouble
+en cyan/magenta, les cartes dérivent indépendamment et les anneaux deviennent un
+vortex. La navigation et la barre de session restent stables. Les effets se
+résorbent en retirant des boissons et disparaissent à la remise à zéro.
+Le mode « Réduire les mouvements » arrête les animations, mais garde les effets
+statiques. Le temps du canvas avance sans saut lors des changements d’intensité.

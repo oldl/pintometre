@@ -67,12 +67,15 @@
     },
     // Ce soir: fine concentric rings, slowly breathing, wobbling more with every glass.
     'result-panel'(c,w,h,t,b){
-      const cx=w*.85,cy=h*.16,max=Math.hypot(w,h),gap=9;c.lineWidth=.8;
+      const chaos=window.resultChaos||0;
+      const cx=w*(.7+Math.sin(t*.37)*.12*chaos/(1+chaos)),cy=h*(.25+Math.cos(t*.29)*.12*chaos/(1+chaos)),max=Math.hypot(w,h),gap=9;c.lineWidth=.8;
       for(let r=gap;r<max;r+=gap){
         c.beginPath();
         for(let a=0;a<=Math.PI*2+.01;a+=.06){
           const rr=r+Math.sin(t*.6+r*.015)*2+Math.sin(a*4+t*1.1+r*.02)*(.4+b*10)*(r/max*2);
-          const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;
+          const twist=a+Math.sin(r/max*5+t*.43)*chaos*.3;
+          const ripple=Math.sin(a*3-t*.71+r*.025)*chaos*12;
+          const x=cx+Math.cos(twist)*(rr+ripple),y=cy+Math.sin(twist)*(rr-ripple);
           a?c.lineTo(x,y):c.moveTo(x,y);
         }
         c.stroke();
@@ -103,9 +106,10 @@
     layers.push(layer);
   });
   const still=()=>document.body.classList.contains('reduced-motion');
+  let phase=0,previousTime=null;
   function paint(layer,now){
     const {ctx:c,w,h}=layer;if(!w||!h||(!layer.always&&!document.body.classList.contains('has-session')))return;
-    const b=window.buzzIntensity||0,t=still()?0:now/1000*(.25+b*.9);
+    const b=window.buzzIntensity||0,t=still()?0:phase;
     c.clearRect(0,0,w,h);
     c.fillStyle=c.strokeStyle=INK;layer.draw(c,w,h,t,b,false,layer);
     if(b>.25){ // double vision: an offset, lighter copy
@@ -115,11 +119,13 @@
   let last=0;
   function loop(now){
     requestAnimationFrame(loop);
+    const dt=previousTime===null?0:Math.min(.1,(now-previousTime)/1000);previousTime=now;
+    if(!document.hidden&&!still())phase+=dt*(.25+(window.buzzIntensity||0)*.9);
     if(document.hidden||now-last<33)return; // ~30 fps is plenty
     last=now;
-    if(still()&&layers.every(l=>l.drawnStill===(window.buzzIntensity||0)))return;
+    if(still()&&layers.every(l=>l.drawnStill===`${window.buzzIntensity||0}:${window.resultChaos||0}`))return;
     const session=document.body.classList.contains('has-session');
-    layers.forEach(l=>{if(l.panel.offsetParent===null||(!l.always&&!session))return;paint(l,now);l.drawnStill=still()?(window.buzzIntensity||0):undefined;});
+    layers.forEach(l=>{if(l.panel.offsetParent===null||(!l.always&&!session))return;paint(l,now);l.drawnStill=still()?`${window.buzzIntensity||0}:${window.resultChaos||0}`:undefined;});
   }
   requestAnimationFrame(loop);
 })();

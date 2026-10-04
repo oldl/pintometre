@@ -531,3 +531,33 @@ h1{font-family:var(--display);font-weight:800;letter-spacing:-.5px;line-height:.
 /* Logo: a minimal beer — yellow block, white head. */
 .brand .brand-icon{background:none;transform:none;width:22px;height:30px;border-radius:0;display:block}
 .brand .brand-icon svg{width:100%;height:100%;display:block}
+
+/* Ce soir: independent, smoothly drifting layers beyond six wine equivalents. */
+body[data-page=resultat].chaotic #main{animation:none;transform:none;filter:none}
+body[data-page=resultat].chaotic #resultat{overflow:clip;padding-bottom:24px;filter:blur(var(--blur));animation:breathe 5.9s ease-in-out infinite alternate}
+body.chaotic #resultat .intro{animation:lost-cards 9.7s ease-in-out infinite alternate}
+body.chaotic #resultat .result-panel{transform-origin:50% 40%;animation:elastic-panel 11.3s ease-in-out infinite alternate}
+body.chaotic #resultat .result-number{animation:lost-number 7.1s ease-in-out infinite alternate}
+body.chaotic #resultat .mega{text-shadow:var(--chaos-color) 2px 0 #00dfdf88,calc(var(--chaos-color)*-1) -2px 0 #fc39aa88,calc(var(--chaos-color)*2) 5px 0 #fff3;filter:blur(var(--chaos-blur))}
+body.chaotic #resultat .drink-list>li{animation:lost-cards 8.3s ease-in-out infinite alternate}
+body.chaotic #resultat .drink-list>li:nth-child(2n){animation-delay:-3.7s;animation-duration:10.9s}
+body.chaotic #resultat .drink-list>li:nth-child(3n){animation-delay:-6.1s;animation-direction:alternate-reverse}
+@keyframes elastic-panel{
+  0%{transform:translate(0,0) rotate(calc(var(--chaos-angle)*-.45)) skewX(var(--chaos-skew))}
+  37%{transform:translate(calc(var(--chaos-shift)*-.4),8px) rotate(var(--chaos-angle)) scaleY(var(--chaos-scale))}
+  73%{transform:translate(calc(var(--chaos-shift)*.4),-5px) rotate(calc(var(--chaos-angle)*-.7)) skewY(var(--chaos-skew))}
+  100%{transform:translate(0,0) rotate(calc(var(--chaos-angle)*.3)) scaleX(var(--chaos-scale))}
+}
+@keyframes lost-number{
+  0%{transform:translate(calc(var(--chaos-shift)*-.7),0) rotate(var(--chaos-angle))}
+  43%{transform:translate(var(--chaos-shift),calc(var(--chaos-shift)*-.5)) rotate(calc(var(--chaos-angle)*-1)) scale(var(--chaos-scale))}
+  100%{transform:translate(calc(var(--chaos-shift)*-.3),calc(var(--chaos-shift)*.6)) rotate(calc(var(--chaos-angle)*.6))}
+}
+@keyframes lost-cards{
+  0%{translate:0 0;rotate:calc(var(--chaos-angle)*-.3)}
+  41%{translate:calc(var(--chaos-shift)*.35) calc(var(--chaos-shift)*-.15);rotate:calc(var(--chaos-angle)*.35)}
+  100%{translate:calc(var(--chaos-shift)*-.35) calc(var(--chaos-shift)*.2);rotate:calc(var(--chaos-angle)*-.15)}
+}
+body.reduced-motion.chaotic #resultat,body.reduced-motion.chaotic #resultat *{animation:none!important}
+
+@media(prefers-reduced-motion:reduce){body.chaotic #resultat,body.chaotic #resultat *{animation:none!important}}

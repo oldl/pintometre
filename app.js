@@ -74,6 +74,19 @@ function renderWineVisual(el,wine,max=6){
 function applyBuzz(wine){
   const k=Math.max(0,Math.min(1,(wine-0.6)/5));      // 0 below ~0,6 🍷, 1 from ~5,6 🍷
   const s=Math.pow(k,1.35);                          // slow start: level 1 barely visible
+  // A logarithmic tail keeps every extra equivalent visible without an abrupt ceiling.
+  const chaos=Math.log1p(Math.max(0,wine-6)/4);
+  window.resultChaos=chaos;
+  const resultVars={
+    '--chaos-shift':`${(chaos*13).toFixed(3)}px`,
+    '--chaos-angle':`${(chaos*3.5).toFixed(3)}deg`,
+    '--chaos-skew':`${(chaos*2).toFixed(3)}deg`,
+    '--chaos-scale':(1+chaos*.035).toFixed(4),
+    '--chaos-color':`${(chaos*5).toFixed(3)}px`,
+    '--chaos-blur':`${(chaos*1.6).toFixed(3)}px`
+  };
+  for(const [name,value] of Object.entries(resultVars))document.documentElement.style.setProperty(name,value);
+  document.body.classList.toggle('chaotic',chaos>0);
   window.buzzIntensity=s;                             // read by opart.js
   const root=document.documentElement.style;
   // Extra blur from 3 🍷: +0,6 px per glass, capped at +2,4 px (reached at 7 🍷).
@@ -253,6 +266,7 @@ $('target').addEventListener('click',()=>{if(!active)return;const register=()=>{
 function route(focus=true){
   let page=location.hash.slice(1)||'accueil';
   if(!['accueil','doser','resultat','simulation'].includes(page)){page='accueil';history.replaceState(null,'','#accueil');}
+  document.body.dataset.page=page;
   if(page==='doser'){if(!pendingEdit&&editingId){editingId=null;renderDraft();}pendingEdit=false;}
   if(active)stopSimulation();
   document.querySelectorAll('.screen').forEach(el=>el.hidden=el.id!==page);
