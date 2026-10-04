@@ -167,6 +167,8 @@ function renderSession(highlightId=null){
   $('session-bar').hidden=empty;document.body.classList.toggle('has-session',!empty);
   $('sim-buzz').textContent=empty?'BUZZ 0 · NET. Ajoute des verres : la cible suit ton compte.':`BUZZ ${level} · ${BUZZ_LABELS[level]}. La cible suit ton compte.`;
   applyBuzz(wine);
+  if(highlightId && !reducedMotion())window.resultPulseAt=performance.now();
+  if(empty)window.resultPulseAt=null;
 }
 
 /* ---------- Session actions ---------- */

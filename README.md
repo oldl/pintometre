@@ -55,3 +55,11 @@ vortex. La navigation et la barre de session restent stables. Les effets se
 résorbent en retirant des boissons et disparaissent à la remise à zéro.
 Le mode « Réduire les mouvements » arrête les animations, mais garde les effets
 statiques. Le temps du canvas avance sans saut lors des changements d’intensité.
+
+### Surface liquide et échos
+
+`result-effects.js` ajoute une déformation SVG lente dès huit équivalents, deux
+échos décoratifs du total dès six, et une onde de 2,4 secondes à chaque ajout.
+Les échos suivent une trajectoire mémorisée avec 330/660 ms de retard. La boucle
+est limitée à environ 30 images/s et suspendue hors de Ce soir, en arrière-plan
+ou lorsque les mouvements sont réduits. Aucun calcul de session n’est modifié.

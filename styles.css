@@ -561,3 +561,16 @@ body.chaotic #resultat .drink-list>li:nth-child(3n){animation-delay:-6.1s;animat
 body.reduced-motion.chaotic #resultat,body.reduced-motion.chaotic #resultat *{animation:none!important}
 
 @media(prefers-reduced-motion:reduce){body.chaotic #resultat,body.chaotic #resultat *{animation:none!important}}
+
+/* Liquid glass, delayed number echoes and a travelling addition wave. */
+.liquid-defs{position:absolute;width:0;height:0;pointer-events:none;overflow:hidden}
+#resultat .result-panel.liquid-active{filter:url(#result-liquid)}
+#resultat .result-number{position:relative;isolation:isolate}
+#total-wine{position:relative;z-index:1}
+.number-echo{position:absolute;pointer-events:none;user-select:none;white-space:nowrap;line-height:inherit;color:#8bffff;opacity:0;z-index:0;filter:blur(1px)}
+.number-echo.echo-1{color:#ff8edd;filter:blur(2px)}
+.addition-wave{position:absolute;left:50%;top:35%;width:90%;aspect-ratio:1;border-radius:50%;border:12px solid #fff5;box-shadow:0 0 35px #bafaff66,inset 0 0 25px #ff9de855;pointer-events:none;opacity:0;z-index:3}
+body.reduced-motion #resultat .result-panel{filter:none}
+body.reduced-motion .number-echo,body.reduced-motion .addition-wave{display:none}
+body.reduced-motion #total-wine{translate:none!important}
+@media(prefers-reduced-motion:reduce){.number-echo,.addition-wave{display:none}#resultat .result-panel.liquid-active{filter:none}#total-wine{translate:none!important}}
