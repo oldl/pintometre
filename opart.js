@@ -109,7 +109,7 @@
   let phase=0,previousTime=null;
   function paint(layer,now){
     const {ctx:c,w,h}=layer;if(!w||!h||(!layer.always&&!document.body.classList.contains('has-session')))return;
-    const b=window.buzzIntensity||0,t=still()?0:phase;
+    const b=(window.buzzIntensity||0)+(window.resultChaos||0)*.65,t=still()?0:phase;
     c.clearRect(0,0,w,h);
     c.fillStyle=c.strokeStyle=INK;layer.draw(c,w,h,t,b,false,layer);
     if(b>.25){ // double vision: an offset, lighter copy

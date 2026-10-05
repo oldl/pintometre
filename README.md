@@ -46,7 +46,7 @@ Aucun compte, stockage persistant, suivi, estimation d’alcoolémie ou délai a
 - Simulation : termine à cinq touches, peut être arrêtée et rejouée.
 - Navigation clavier, zoom autorisé, dialogues fermables avec Échap, préférences de mouvement réduit.
 
-## Progression chaotique — Ce soir
+## Progression chaotique — toute l’interface
 
 Au-delà de six équivalents vin (et non six boissons), une intensité logarithmique
 continue à croître avec chaque ajout. Le panneau se déforme, le total se dédouble
@@ -61,5 +61,15 @@ statiques. Le temps du canvas avance sans saut lors des changements d’intensit
 `result-effects.js` ajoute une déformation SVG lente dès huit équivalents, deux
 échos décoratifs du total dès six, et une onde de 2,4 secondes à chaque ajout.
 Les échos suivent une trajectoire mémorisée avec 330/660 ms de retard. La boucle
-est limitée à environ 30 images/s et suspendue hors de Ce soir, en arrière-plan
+est limitée à environ 30 images/s et suspendue en arrière-plan
 ou lorsque les mouvements sont réduits. Aucun calcul de session n’est modifié.
+
+
+### Intensité partagée entre les écrans
+
+Accueil, Doser, Ce soir et Simulation utilisent le total exact de la session pour
+les effets liquides, les mouvements et les fonds animés. Les échos décoratifs
+suivent le chiffre affiché sur Accueil, Doser et Ce soir ; la Simulation conserve
+ses propres cibles fantômes. Seul le panneau visible est animé. Modifier un
+nouveau verre avant de l’ajouter ne change pas l’intensité de la soirée.
+Navigation et barre de session restent stables sur les quatre écrans.

@@ -533,15 +533,15 @@ h1{font-family:var(--display);font-weight:800;letter-spacing:-.5px;line-height:.
 .brand .brand-icon svg{width:100%;height:100%;display:block}
 
 /* Ce soir: independent, smoothly drifting layers beyond six wine equivalents. */
-body[data-page=resultat].chaotic #main{animation:none;transform:none;filter:none}
-body[data-page=resultat].chaotic #resultat{overflow:clip;padding-bottom:24px;filter:blur(var(--blur));animation:breathe 5.9s ease-in-out infinite alternate}
-body.chaotic #resultat .intro{animation:lost-cards 9.7s ease-in-out infinite alternate}
-body.chaotic #resultat .result-panel{transform-origin:50% 40%;animation:elastic-panel 11.3s ease-in-out infinite alternate}
-body.chaotic #resultat .result-number{animation:lost-number 7.1s ease-in-out infinite alternate}
-body.chaotic #resultat .mega{text-shadow:var(--chaos-color) 2px 0 #00dfdf88,calc(var(--chaos-color)*-1) -2px 0 #fc39aa88,calc(var(--chaos-color)*2) 5px 0 #fff3;filter:blur(var(--chaos-blur))}
-body.chaotic #resultat .drink-list>li{animation:lost-cards 8.3s ease-in-out infinite alternate}
-body.chaotic #resultat .drink-list>li:nth-child(2n){animation-delay:-3.7s;animation-duration:10.9s}
-body.chaotic #resultat .drink-list>li:nth-child(3n){animation-delay:-6.1s;animation-direction:alternate-reverse}
+body.chaotic #main{animation:none;transform:none;filter:none}
+body.chaotic .screen{overflow:clip;padding-bottom:24px;filter:blur(var(--blur));animation:breathe 5.9s ease-in-out infinite alternate}
+body.chaotic .screen .intro{animation:lost-cards 9.7s ease-in-out infinite alternate}
+body.chaotic .screen .color-panel{transform-origin:50% 40%;animation:elastic-panel 11.3s ease-in-out infinite alternate}
+body.chaotic .echo-container{animation:lost-number 7.1s ease-in-out infinite alternate}
+body.chaotic .screen .effect-number{text-shadow:var(--chaos-color) 2px 0 #00dfdf88,calc(var(--chaos-color)*-1) -2px 0 #fc39aa88,calc(var(--chaos-color)*2) 5px 0 #fff3;filter:blur(var(--chaos-blur))}
+body.chaotic .screen .drink-list>li{animation:lost-cards 8.3s ease-in-out infinite alternate}
+body.chaotic .screen .drink-list>li:nth-child(2n){animation-delay:-3.7s;animation-duration:10.9s}
+body.chaotic .screen .drink-list>li:nth-child(3n){animation-delay:-6.1s;animation-direction:alternate-reverse}
 @keyframes elastic-panel{
   0%{transform:translate(0,0) rotate(calc(var(--chaos-angle)*-.45)) skewX(var(--chaos-skew))}
   37%{transform:translate(calc(var(--chaos-shift)*-.4),8px) rotate(var(--chaos-angle)) scaleY(var(--chaos-scale))}
@@ -558,19 +558,19 @@ body.chaotic #resultat .drink-list>li:nth-child(3n){animation-delay:-6.1s;animat
   41%{translate:calc(var(--chaos-shift)*.35) calc(var(--chaos-shift)*-.15);rotate:calc(var(--chaos-angle)*.35)}
   100%{translate:calc(var(--chaos-shift)*-.35) calc(var(--chaos-shift)*.2);rotate:calc(var(--chaos-angle)*-.15)}
 }
-body.reduced-motion.chaotic #resultat,body.reduced-motion.chaotic #resultat *{animation:none!important}
+body.reduced-motion.chaotic .screen,body.reduced-motion.chaotic .screen *{animation:none!important}
 
-@media(prefers-reduced-motion:reduce){body.chaotic #resultat,body.chaotic #resultat *{animation:none!important}}
+@media(prefers-reduced-motion:reduce){body.chaotic .screen,body.chaotic .screen *{animation:none!important}}
 
 /* Liquid glass, delayed number echoes and a travelling addition wave. */
 .liquid-defs{position:absolute;width:0;height:0;pointer-events:none;overflow:hidden}
-#resultat .result-panel.liquid-active{filter:url(#result-liquid)}
-#resultat .result-number{position:relative;isolation:isolate}
-#total-wine{position:relative;z-index:1}
+.screen .color-panel.liquid-active{filter:url(#result-liquid)}
+.echo-container{position:relative;isolation:isolate}
+.effect-number{position:relative;z-index:1}
 .number-echo{position:absolute;pointer-events:none;user-select:none;white-space:nowrap;line-height:inherit;color:#8bffff;opacity:0;z-index:0;filter:blur(1px)}
 .number-echo.echo-1{color:#ff8edd;filter:blur(2px)}
 .addition-wave{position:absolute;left:50%;top:35%;width:90%;aspect-ratio:1;border-radius:50%;border:12px solid #fff5;box-shadow:0 0 35px #bafaff66,inset 0 0 25px #ff9de855;pointer-events:none;opacity:0;z-index:3}
-body.reduced-motion #resultat .result-panel{filter:none}
+body.reduced-motion .screen .color-panel{filter:none}
 body.reduced-motion .number-echo,body.reduced-motion .addition-wave{display:none}
-body.reduced-motion #total-wine{translate:none!important}
-@media(prefers-reduced-motion:reduce){.number-echo,.addition-wave{display:none}#resultat .result-panel.liquid-active{filter:none}#total-wine{translate:none!important}}
+body.reduced-motion .effect-number{translate:none!important}
+@media(prefers-reduced-motion:reduce){.number-echo,.addition-wave{display:none}.screen .color-panel.liquid-active{filter:none}.effect-number{translate:none!important}}

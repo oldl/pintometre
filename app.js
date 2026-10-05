@@ -72,6 +72,7 @@ function renderWineVisual(el,wine,max=6){
 /* ---------- Buzz engine ---------- */
 // Continuous intensity from the session total; every effect is a CSS variable.
 function applyBuzz(wine){
+  window.sessionWine=wine;
   const k=Math.max(0,Math.min(1,(wine-0.6)/5));      // 0 below ~0,6 🍷, 1 from ~5,6 🍷
   const s=Math.pow(k,1.35);                          // slow start: level 1 barely visible
   // A logarithmic tail keeps every extra equivalent visible without an abrupt ceiling.
